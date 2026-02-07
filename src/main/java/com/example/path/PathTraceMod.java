@@ -9,30 +9,28 @@ import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 
 public class PathTraceMod implements ClientModInitializer {
+    // Hai biến này là quan trọng nhất để Shader đọc
     public static boolean isGenerating = false;
     public static int frameCount = 0;
+    
     private static KeyBinding renderBtn;
 
     @Override
     public void onInitializeClient() {
-        // Đăng ký nút G
         renderBtn = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.pathtrace.gen", 
-                InputUtil.Type.KEYSYM, 
-                GLFW.GLFW_KEY_G, 
-                "Path Tracing"
+                "key.pathtrace.gen", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_G, "Path Tracing"
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (renderBtn.wasPressed()) {
                 isGenerating = !isGenerating;
-                frameCount = 0;
+                frameCount = 0; // Reset khi bắt đầu
                 if (client.player != null) {
-                    client.player.sendMessage(Text.of(isGenerating ? "§aBẮT ĐẦU RENDER PATH TRACING..." : "§cĐÃ DỪNG."), true);
+                    client.player.sendMessage(Text.of(isGenerating ? "§aBẮT ĐẦU RENDER..." : "§cĐÃ DỪNG."), true);
                 }
             }
             if (isGenerating) {
-                frameCount++;
+                frameCount++; // Tăng số khung hình để Shader cộng dồn
             }
         });
     }
