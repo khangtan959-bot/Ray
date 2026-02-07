@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "pathtracemod",
+  "version": "${version}",
+  "name": "Path Trace Generator",
+  "description": "Generate 1 frame Path Tracing",
+  "authors": [ "YourName" ],
+  "contact": { "sources": "https://github.com/fabricmc/fabric-example-mod" },
+  "license": "MIT",
+  "icon": "assets/pathtracemod/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [ "com.example.path.PathTraceMod" ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.22",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "fabric-api": "*"
+  }
+}
